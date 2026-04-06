@@ -17,5 +17,17 @@
   "files": {
     "ignore": ["node_modules", "dist"],
     "ignoreUnknown": true
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.test.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    }
+  ]
 }

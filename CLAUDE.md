@@ -9,8 +9,10 @@ just fmt        # Biome フォーマット
 just lint       # Biome lint
 just typecheck  # TypeScript 型チェック
 just test       # Bun test
-just check      # CI 相当（fmt-check + lint + typecheck + test）
+just check      # CI 相当（lint + typecheck）
 just build      # ビルド（Bun bundle + tsc declarations）
+just push       # check + test してから push
+just release    # リリース（version bump + push）
 ```
 
 ## Structure
@@ -19,6 +21,8 @@ just build      # ビルド（Bun bundle + tsc declarations）
 src/                # ソースコード
 dist/               # ビルド出力
 .github/workflows/  # CI/CD
+  ci.yml            # テスト（push/PR）
+  publish.yml       # npm publish（package.json version 変更トリガー）
 ```
 
 ## Guidelines
@@ -27,3 +31,6 @@ dist/               # ビルド出力
 - テストファースト開発
 - Biome でフォーマット・lint 統一
 - `"type": "module"` (ESM)
+- `just check` を通してから push
+- push は `just push` を使う（直接 push は hook でブロック）
+- リリースは `just release` で自動化
