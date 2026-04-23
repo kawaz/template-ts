@@ -33,9 +33,10 @@ check:
 ensure-clean:
     test "$(jj log -r @ --no-graph -T 'empty')" = "true"
 
-# push (check + test を通してから push)
-push: check test
-    jj git push
+# push (ensure-clean + check + test を通してから @- を push)
+push: ensure-clean check test
+    jj bookmark set main -r @-
+    jj git push --bookmark main
 
 # CI 相当のチェック
 ci: check test build
